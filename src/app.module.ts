@@ -19,13 +19,13 @@ import { UserModule } from './user/user.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
+      useFactory: () => ({
         type: 'postgres',
-        host: configService.get<string>('POSTGRES_HOST'),
-        port: configService.get<number>('POSTGRES_PORT'),
-        username: configService.get<string>('POSTGRES_USER'),
-        password: configService.get<string>('POSTGRES_PASS'),
-        database: configService.get<string>('POSTGRES_DB'),
+        host: 'localhost', //configService.get<string>('POSTGRES_HOST'),
+        port: 5433, //configService.get<number>('POSTGRES_PORT'),
+        username:'postgres', //configService.get<string>('POSTGRES_USER'),
+        password: 'admin', //configService.get<string>('POSTGRES_PASS'),
+        database: 'NestDB', //configService.get<string>('POSTGRES_DB'),
         synchronize: true,
         entities: [TodoEntity],
         autoLoadEntities: true,
