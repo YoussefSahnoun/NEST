@@ -11,7 +11,7 @@ import { Time } from 'src/common/time';
 
 @Entity('todo')
 export class TodoEntity extends Time {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
   id: Number;
 
   @Column()

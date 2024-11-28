@@ -8,7 +8,7 @@ import {
   Get,
   Query,
   Req,
-  UseGuards,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { AddTodo } from './dto/addTodo';
@@ -20,42 +20,47 @@ export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @Post()
-  async addTodo(@Body() createTodoDto: AddTodo, @Req() req: Request) {
-    return this.todoService.addTodo(createTodoDto, 1);
+  async addTodo(@Body() createTodoDto: AddTodo, @Req() req: any) {
+    const userId = req.user.userId; // Extract userId from middleware
+    if (!userId) {
+      throw new UnauthorizedException('User ID not found in request');
+    }
+    return this.todoService.addTodo(createTodoDto, userId); // Pass userId to service
   }
 
   @Put('/:id')
-  async updateTodo(@Param('id') id: number, @Body() updateTodoDto: updateTodo) {
-    return this.todoService.updateTodo(id, updateTodoDto);
+  async updateTodo(@Param('id') id: number, @Body() updateTodoDto: updateTodo, @Req() req: any) {
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new UnauthorizedException('User ID not found in request');
+    }
+    return this.todoService.updateTodo(id, updateTodoDto, userId); // Pass userId to service
   }
 
   @Delete('/:id')
-  async deleteTodo(@Param('id') id: number) {
-    return this.todoService.deleteTodo(id);
+  async deleteTodo(@Param('id') id: number, @Req() req: any) {
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new UnauthorizedException('User ID not found in request');
+    }
+    return this.todoService.deleteTodo(id, userId); // Pass userId to service
   }
 
-  @Put('/restore/:id')
-  async restoreTodo(@Param('id') id: number) {
-    return this.todoService.restoreTodo(id);
-  }
-  @Get('/count')
-  async count() {
-    return this.todoService.countTodosByStatus();
-  }
   @Get()
-  async get(
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 10,
-  ) {
-    return this.todoService.getTodo({ page, limit });
-  }
-  @Get('/getPerso')
-  async getPerso(@Body() todoPerso: todoPerso) {
-    return this.todoService.getTodoPerso(todoPerso.test, todoPerso.status);
-  }
-  @Get('/:id')
-  async getById(@Param('id') id: number) {
-    return this.todoService.getTodoByID(id);
+  async get(@Query('page') page: number = 1, @Query('limit') limit: number = 10, @Req() req: any) {
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new UnauthorizedException('User ID not found in request');
+    }
+    return this.todoService.getTodoByUser({ page, limit }, userId); // Pass userId to service
   }
 
+  @Get('/:id')
+  async getById(@Param('id') id: number, @Req() req: any) {
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new UnauthorizedException('User ID not found in request');
+    }
+    return this.todoService.getTodoByID(id, userId); // Pass userId to service
+  }
 }

@@ -2,7 +2,7 @@ import { Time } from '../../common/time';
 //import { CvEntity } from "../../cv/entities/cv.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('user')
+@Entity('users')
 export class UserEntity extends Time {
   @PrimaryGeneratedColumn()
   id: number;

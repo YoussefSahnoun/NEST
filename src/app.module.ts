@@ -9,7 +9,7 @@ import { TodoEntity } from './todo/entities/todo.entity';
 import { TodoController } from './todo/todo.controller';
 import { TodoService } from './todo/todo.service';
 import { TodoModule } from './todo/todo.module';
-import { AuthenticationMiddleware } from './middlewares/auth.middleware';
+import { AuthenticationMiddleware } from './middleware/auth.middleware';
 import { UserModule } from './user/user.module';
 
 @Module({
