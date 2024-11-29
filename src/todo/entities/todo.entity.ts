@@ -6,8 +6,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { StatusEnum } from 'src/todo/entities/StatusEnum';
-import { Time } from 'src/common/time';
+
+import { StatusEnum } from './StatusEnum';
+import { Time } from '../../common/time';
 
 @Entity('todo')
 export class TodoEntity extends Time {

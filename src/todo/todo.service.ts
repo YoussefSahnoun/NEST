@@ -5,8 +5,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { StatusEnum } from 'src/todo/entities/StatusEnum';
-import { TodoEntity } from 'src/todo/entities/todo.entity';
+import { StatusEnum } from './entities/StatusEnum';
+import { TodoEntity } from './entities/todo.entity';
 import { Like, Repository, UpdateResult } from 'typeorm';
 import { ErrorMessages } from 'src/common/error-messages';
 import { AddTodo } from './dto/addTodo';

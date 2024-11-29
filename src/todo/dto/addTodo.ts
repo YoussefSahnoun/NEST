@@ -5,8 +5,8 @@ import {
   maxLength,
   MinLength,
 } from 'class-validator';
-import { StatusEnum } from 'src/todo/entities/StatusEnum';
-import { ErrorMessages } from 'src/common/error-messages';
+import { StatusEnum } from '../entities/StatusEnum';
+import { ErrorMessages } from '../../common/error-messages';
 export class AddTodo {
   @IsNotEmpty({ message: ErrorMessages.DESCRIPTION_REQUIRED })
   @MinLength(10, {

@@ -5,7 +5,7 @@ const secretKey = 'yourSecretKey';
 
 // Payload data to include in the JWT
 const payload = {
-  userId:2,// Example user ID
+  userId:1,// Example user ID
    
 };
 
